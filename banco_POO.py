@@ -38,7 +38,8 @@ class Banco: ##Atributos privados nome,agencia e numero
     
     ##FUNÇÃO PARA SALDO ATUAL    
     def saldo_atual(self):
-        tot=sum(self.saldo)+100
+        print(self.saldo)
+        tot=sum(self.saldo)
         for t in self.saldo:
             print('Deposito')
             print(t)
@@ -47,11 +48,12 @@ class Banco: ##Atributos privados nome,agencia e numero
     
     ##FUNÇÃO PARA TRANSFERENCIA
     def transferencia(self):
-        transferir=int(input('Selecione um valor para trasnferir '))
+        transferir=int(input('Selecione um valor para transferir '))
         print(self.saldo)
-        self.saldo=sum(self.saldo)
-        if self.saldo>transferir:
+        tot=sum(self.saldo)
+        if self.saldo>tot:
             print(f'Transferencia aprovada de R${transferir}')
+            self.saldo=self.saldo-tot
         else:
             print('Valor para trasnferencia insuficiente')
         
@@ -72,6 +74,6 @@ class Banco: ##Atributos privados nome,agencia e numero
 p1=Banco('Addam','2569','123456')
 print(p1._nome_titular)
 p1.depositar()
-p1.saque()
+p1.saldo_atual()
 p1.depositar()
 p1.saldo_atual()
