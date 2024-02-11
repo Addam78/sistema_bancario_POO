@@ -12,68 +12,64 @@ class Banco: ##Atributos privados nome,agencia e numero
         self._nome_titular=nome_titular
         self._agencia=agencia
         self._numero_conta=numero_conta
-        self.saldo=[]
-    
-    ##Senha vai ficar salva
-    #input('Digite a senha para realizar login ') 
-
-    print('-=-' *10)
-    print('Bem vindo ao seu aplicativo de banco'.upper())
-    print('Por padrão como sua conta foi criada agora, voce tem um bonus' 
-          'de deposito de R$100, aproveite para movimentar sua conta')
-    print('-=-' *10)
-    
-    ##Escolha das opções de serviço no app do banco
-    print('Qual das opções voce deseja escolher ')
-
-    ##FUNÇÃO PARA DEPOSITO
-    def depositar(self):
-        valor=int(input('Qual quantia deseja depositar ?'))
-        self.saldo.append(valor)
-        print('Historico de deposito')
-        print('-=-' *14)
-        for n in self.saldo:
-            print(n)
-            print('-=-'*14)
-    
-    ##FUNÇÃO PARA SALDO ATUAL    
-    def saldo_atual(self):
-        print(self.saldo)
-        tot=sum(self.saldo)
-        for t in self.saldo:
-            print('Deposito')
-            print(t)
-            print('=-='*8)
-        print(f'Saldo atual na conta é de  R${tot}')
-    
-    ##FUNÇÃO PARA TRANSFERENCIA
-    def transferencia(self):
-        transferir=int(input('Selecione um valor para transferir '))
-        print(self.saldo)
-        tot=sum(self.saldo)
-        if self.saldo>tot:
-            print(f'Transferencia aprovada de R${transferir}')
-            self.saldo=self.saldo-tot
-        else:
-            print('Valor para trasnferencia insuficiente')
+        self.extrato=[]
+        self.total=float
+      
+    ##DEPOSITOS E INSERÇÃO DE DEPOSITO MAX   
+    def deposito(self):
+        valor=float(input('Digite um valor para deposito '))
+        self.extrato.append(valor)
+        self.total=sum(self.extrato)
         
-    ##FUNÇÃO PARA SAQUE
+            
+    ##FUNÇÃO PARA SALDO TOTAL   
+    def total_conta(self):
+        print(f'Seu saldo atual é de  R${self.total}')
+        print('-=-' *10)
+    
+    ##FUNÇÃO PARA SAQUE 
     def saque(self):
-        saque=int(input('Qual quantia deseja sacar ?'))
-        total=sum(self.saldo)
-        if saque > total:
-            print(f'Voce não pode sacar, pois não existe R${total} na sua conta')
+        valor=float(input('Digite o valor que deseja sacar '))
+        if valor > self.total:
+            print('O valor que deseja sacar excede seu limite bancario ')
+            print('-=-' *10)
         else:
-            valor_atual=total-saque
-            print(valor_atual)
-            
-            
-        
-        
+            self.total-=valor
+            print(f'Valor de R${valor} sacado com sucesso ')
+            print('-=-' *10)
     
-p1=Banco('Addam','2569','123456')
-print(p1._nome_titular)
-p1.depositar()
-p1.saldo_atual()
-p1.depositar()
-p1.saldo_atual()
+    ##FUNÇÃO DE RECARGA
+    def recarga(self):
+        print('Digite o numero do celular, operadora e valor do credito')
+        numero=input('numero: ')
+        print('-=-' *10)
+        operadora=input('operadora: ')
+        print('-=-' *10)
+        credito=float(input('credito: '))
+        if credito > self.total:
+            print('Valor acima do saldo: ')
+        else:
+            self.total-=credito
+            print(f'Celular carregado com valor de R${credito} de credito com sucesso ') 
+            print('-=-' *10)
+            
+    ##HISTORICO DE DEPOSITOS
+    def historico(self):
+        print('historico de depositos'.upper())
+        for n in self.extrato:
+            print('-=-' *10)
+            print(f'Valor depositado de {n}')
+            print('-=-' *10)  
+            
+p1=Banco('Addam','21564',1525)
+p1.deposito()
+p1.deposito()
+p1.total_conta()
+p1.saque()
+p1.total_conta()
+p1.recarga()
+p1.total_conta()
+p1.historico()
+
+
+
