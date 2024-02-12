@@ -20,8 +20,7 @@ class Banco: ##Atributos privados nome,agencia e numero
         valor=float(input('Digite um valor para deposito '))
         self.extrato.append(valor)
         self.total=sum(self.extrato)
-        
-            
+                
     ##FUNÇÃO PARA SALDO TOTAL   
     def total_conta(self):
         print(f'Seu saldo atual é de  R${self.total}')
